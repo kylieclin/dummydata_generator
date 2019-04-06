@@ -3,7 +3,9 @@ import 'materialize-css/dist/js/materialize.min';
 import React, {Component} from 'react';
 import '../assets/css/app.scss';
 import logo from '../assets/images/logo.svg';
+import GenerateData from './output/generate_data';
 import InputFields from './input/input_field';
+
 
 class App extends Component {
 
@@ -11,17 +13,12 @@ class App extends Component {
         return(
             <div>
                 <div className="app">
-                    <InputFields />
-                    
+                    <GenerateData />
+                    <InputFields />               
                 </div>
             </div>
         );
     }
-} 
-
-
-
-
-
+}
 
 export default App;
