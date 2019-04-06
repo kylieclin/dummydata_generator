@@ -11,9 +11,11 @@ class GenerateData extends Component {
     }
 
     getRandomWords(numOfWords){
+        const getKey = axios.get('//https://yacdn.org/proxy/https://random-word-api.herokuapp.com/key');
+
         const resp = axios.get('https://random-word-api.herokuapp.com/word', {
             params: {
-                key: 'LXUJXE7X',
+                key: key,
                 number: numOfWords
             }
         }).then((resp) => {
