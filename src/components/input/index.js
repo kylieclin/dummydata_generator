@@ -9,35 +9,33 @@ class InputFields extends Component{
 
         this.state= {
             inputBox:['input_0'],
-            fields: [],
-            options:[],
+            data:[],
             error: ''
         };
         this.passField = this.passField.bind(this);
         this.addField = this.addField.bind(this);
     }
     passField(){
-        let fieldsarr= [];
-        let optionsarr=[];
-        console.log('this.refs', this.refs)
+
+        const data =[]
         Object.keys(this.refs).map((input)=>{
 
-            const {field, option} = this.refs[input].state;
             if(!field && !option ){
                 this.setState({
                     error: 'Please enter input field and data type.'
                 })
             } else {
-               fieldsarr.push(field);
-               optionsarr.push(option);
-            }
+
+               data.push(this.refs[input].state)
+            } 
+
         })
         this.setState({
-            fields: [...this.state.fields].concat(fieldsarr),
-            options: [...this.state.options].concat(optionsarr)
+            data: [...this.state.data].concat(data)
+
         })
 
-        this.props.getFields();
+        
     }
     addField(){
         const newInput = `input_${this.state.inputBox.length}`;
@@ -45,9 +43,12 @@ class InputFields extends Component{
             inputBox: [...this.state.inputBox, newInput]
         })
     }
-
+    componentDidUpdate(){
+        console.log('did mount');
+        this.props.getFields(this.state);
+    }
     render(){
-        this.props.data.data = this.state;
+        console.log(this.state.data);
         const createInput = this.state.inputBox.map((item, index)=>{
             return <Inputs ref={index} key={index} id={item}/>
         })
