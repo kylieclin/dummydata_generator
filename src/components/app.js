@@ -22,18 +22,13 @@ class App extends Component {
         console.log("APP:",this.data);
     }
     render(){
-        
+
         return(
             <div>
                 <div className="app">
-
-                    <Route path="/" exact component={InputFields} />
-                    <Route path="/generate" component={GenerateData} />
-
                     <h1 className="center">Dummy Data Generator</h1>
-                    {/* <GenerateData /> */}
-                    <InputFields data={this.data} getFields={this.getFields}ref="inputs"/>               
-
+                    <Route path="/" exact render={() => <InputFields data={this.data} getFields={this.getFields}/>} />
+                    <Route path="/generate" render={() => <GenerateData />} />
                 </div>
             </div>
         );

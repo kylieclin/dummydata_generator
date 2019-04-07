@@ -2,29 +2,42 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 class GenerateData extends Component {
-    state = {
-        words: null,
-        numOfWords: 2
+    constructor(props){
+        super(props)
+        this.state = {
+            words: null,
+            numOfWords: 2
+        }
+        this.newKey = null;
     }
+
 
     componentDidMount(){
         //needs to be dynamic
-        this.getRandomWords('name')
+        this.getRandomWords()
     }
 
-    getRandomWords(fieldWord){
-        const resp = axios.get('https://api.datamuse.com/words', {
-            params: {
-                rel_gen: fieldWord
-            }
+    getRandomWords(){
+        axios.get('https://yacdn.org/proxy/https://random-word-api.herokuapp.com/key', {
         }).then((resp) => {
-            this.setState({
-                words: resp.data
+            this.newKey = resp.data;
+            return axios.get('https://random-word-api.herokuapp.com/word', {
+                params: {
+                    key: this.newKey,
+                    number: this.state.numOfWords
+                }
+            }).then((resp) => {
+                console.log('getword',resp)
+                this.setState({
+                    words: resp.data
+                });
             });
-        })
+        });
     }
 
     render(){
+        console.log('inputs', this.props.inputs)
+        console.log(this.state.words)
         const {words, numOfWords} = this.state;
         if(words === null){
             return (
@@ -34,15 +47,14 @@ class GenerateData extends Component {
                 </div>
             );
         }
-        let inputValue = ''
-        for(let i = 0; i < numOfWords; i++){
-            inputValue += words[i].word + ' '
-        }
-        console.log('2 words', inputValue)
+        const inputValue = words.map((word, index) => {
+            return <p key={index}>{word}</p>
+        })
+
         return(
             <div>
                 <h1>HERE IS YOUR DATA</h1>
-                <p>{inputValue}</p>
+                {inputValue}
             </div>
         );
     }
