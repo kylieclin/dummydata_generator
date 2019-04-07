@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class GenerateData extends Component {
     state = {
-        words: [],
+        words: null,
         numOfWords: 2
     }
 
@@ -25,17 +25,24 @@ class GenerateData extends Component {
     }
 
     render(){
-        console.log('state',this.state)
         const {words, numOfWords} = this.state;
-        console.log('words', words)
-        const inputValue = ''
-        for(var i = 0; i < numOfWords; i++){
-            //inputValue +=
+        if(words === null){
+            return (
+                <div>
+                    <h1>HERE IS YOUR DATA</h1>
+                    <p>Lorem, ipsum.</p>
+                </div>
+            );
         }
+        let inputValue = ''
+        for(let i = 0; i < numOfWords; i++){
+            inputValue += words[i].word + ' '
+        }
+        console.log('2 words', inputValue)
         return(
             <div>
                 <h1>HERE IS YOUR DATA</h1>
-
+                <p>{inputValue}</p>
             </div>
         );
     }
