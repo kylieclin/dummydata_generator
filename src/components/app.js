@@ -15,24 +15,24 @@ class App extends Component {
         this.state = {
         }
 
-        this.data = {}
+
         this.getFields = this.getFields.bind(this);
     }
-    getFields(){
-        console.log("APP:",this.data);
+    getFields(data){
+        console.log("APP:",data);
     }
     render(){
         
         return(
             <div>
                 <div className="app">
-
-                    <Route path="/" exact component={InputFields} />
+                    <h1 className="center">Dummy Data Generator</h1>
+                    <Route path="/" exact render={(props) => <InputFields {...props} getFields={this.getFields} /> }/>
                     <Route path="/generate" component={GenerateData} />
 
-                    <h1 className="center">Dummy Data Generator</h1>
+                    
                     {/* <GenerateData /> */}
-                    <InputFields data={this.data} getFields={this.getFields}ref="inputs"/>               
+                    {/* <InputFields  getFields={this.getFields} ref="inputs"/> */}
 
                 </div>
             </div>
