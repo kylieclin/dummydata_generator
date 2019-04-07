@@ -19,14 +19,16 @@ class InputFields extends Component{
 
         const data =[]
         Object.keys(this.refs).map((input)=>{
-      
+
             if(!field && !option ){
                 this.setState({
                     error: 'Please enter input field and data type.'
                 })
             } else {
+
                data.push(this.refs[input].state)
             } 
+
         })
         this.setState({
             data: [...this.state.data].concat(data)
@@ -53,12 +55,12 @@ class InputFields extends Component{
         return(
         <Fragment>
             <div className="row">
-              {createInput}  
+              {createInput}
             </div>
             <div className="row buttons">
                 <div className="error red-text">{this.state.error}</div>
-                <Addfield addFields={this.addField} />                
-                <Generate passField={this.passField}/>   
+                <Addfield addFields={this.addField} />
+                <Generate passField={this.passField}/>
             </div>
         </Fragment>
         )

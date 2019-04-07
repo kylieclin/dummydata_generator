@@ -22,17 +22,15 @@ class App extends Component {
         console.log("APP:",data);
     }
     render(){
-        
+
         return(
             <div>
                 <div className="app">
                     <h1 className="center">Dummy Data Generator</h1>
-                    <Route path="/" exact render={(props) => <InputFields {...props} getFields={this.getFields} /> }/>
-                    <Route path="/generate" component={GenerateData} />
 
-                    
-                    {/* <GenerateData /> */}
-                    {/* <InputFields  getFields={this.getFields} ref="inputs"/> */}
+                    <Route path="/" exact render={(props) => <InputFields {...props} getFields={this.getFields}/>} />
+                    <Route path="/generate" render={() => <GenerateData />} />
+
 
                 </div>
             </div>

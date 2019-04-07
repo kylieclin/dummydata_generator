@@ -25,21 +25,21 @@ class InputBox extends Component {
     }
     componentDidMount(){
         M.FormSelect.init(this.formSelect);
-    }  
+    }
     render(){
         return (
             <Fragment>
-                <div className="field-input col s8 m6"> 
+                <div className="field-input col s8 m6">
                     <form className=""action="">
                         <label htmlFor="field">Field</label>
-                        <input id="field" name="field" className="field" type="text" value={this.field} onChange={this.handleInput} placeholder="Enter Field"/> 
-                    </form>  
+                        <input id="field" name="field" className="field" type="text" value={this.field} onChange={this.handleInput} placeholder="Enter Field"/>
+                    </form>
                 </div>
                 <div className="type-select col s4 m2">
                     <label>Select Data Type
                     <select  defaultValue="" onChange={this.handleSelect} ref={(element)=>{this.formSelect = element}}>
                         <option value="" disabled>Select</option>
-                        <option value="stirng">String</option>
+                        <option value="string">String</option>
                         <option value="number">Number</option>
                         <option value="object">Object</option>
                         <option value="array">Array</option>
