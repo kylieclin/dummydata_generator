@@ -13,6 +13,7 @@ class App extends Component {
         super(props)
 
         this.state = {
+            data: {}
         }
 
 
@@ -20,6 +21,10 @@ class App extends Component {
     }
     getFields(data){
         console.log("APP:",data);
+        this.setState({
+            data
+        })
+        console.log('app.js: data', this.state.data)
     }
     render(){
 
@@ -29,7 +34,7 @@ class App extends Component {
                     <h1 className="center">Dummy Data Generator</h1>
 
                     <Route path="/" exact render={(props) => <InputFields {...props} getFields={this.getFields}/>} />
-                    <Route path="/generate" render={() => <GenerateData />} />
+                    <Route path="/generate" render={() => <GenerateData inputs={this.state.data}/>} />
 
 
                 </div>
