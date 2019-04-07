@@ -3,31 +3,46 @@ import axios from 'axios';
 
 class GenerateData extends Component {
     state = {
-
+        words: null,
+        numOfWords: 2
     }
 
     componentDidMount(){
-        this.getRandomWords(2)
+        //needs to be dynamic
+        this.getRandomWords('name')
     }
 
-    getRandomWords(numOfWords){
-        const getKey = axios.get('//https://yacdn.org/proxy/https://random-word-api.herokuapp.com/key');
-
-        const resp = axios.get('https://random-word-api.herokuapp.com/word', {
+    getRandomWords(fieldWord){
+        const resp = axios.get('https://api.datamuse.com/words', {
             params: {
-                key: key,
-                number: numOfWords
+                rel_gen: fieldWord
             }
         }).then((resp) => {
-            console.log('response', resp)
-        });
+            this.setState({
+                words: resp.data
+            });
+        })
     }
 
     render(){
+        const {words, numOfWords} = this.state;
+        if(words === null){
+            return (
+                <div>
+                    <h1>HERE IS YOUR DATA</h1>
+                    <p>Lorem, ipsum.</p>
+                </div>
+            );
+        }
+        let inputValue = ''
+        for(let i = 0; i < numOfWords; i++){
+            inputValue += words[i].word + ' '
+        }
+        console.log('2 words', inputValue)
         return(
             <div>
                 <h1>HERE IS YOUR DATA</h1>
-
+                <p>{inputValue}</p>
             </div>
         );
     }

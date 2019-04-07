@@ -1,6 +1,7 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import React, {Component} from 'react';
+import {Route} from 'react-router-dom';
 import '../assets/css/app.scss';
 
 import GenerateData from './output/generate_data';
@@ -25,9 +26,14 @@ class App extends Component {
         return(
             <div>
                 <div className="app">
+
+                    <Route path="/" exact component={InputFields} />
+                    <Route path="/generate" component={GenerateData} />
+
                     <h1 className="center">Dummy Data Generator</h1>
                     {/* <GenerateData /> */}
                     <InputFields data={this.data} getFields={this.getFields}ref="inputs"/>               
+
                 </div>
             </div>
         );
