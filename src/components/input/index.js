@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Inputs from './inputbox';
 import Generate from './call_generate';
 import Addfield from './add_field';
+import GenerateData from '../output/generate_data';
 
 class InputFields extends Component{
     constructor(props){
@@ -9,14 +10,14 @@ class InputFields extends Component{
 
         this.state= {
             inputBox:['input_0'],
-            data:[],
-            error: ''
+            data: [],
+            error: '',
+            showGenerate: false
         };
         this.passField = this.passField.bind(this);
         this.addField = this.addField.bind(this);
     }
     passField(){
-
         const data =[]
         Object.keys(this.refs).map((input)=>{
 
@@ -27,15 +28,13 @@ class InputFields extends Component{
             } else {
 
                data.push(this.refs[input].state)
-            } 
+            }
 
         })
         this.setState({
-            data: [...this.state.data].concat(data)
-
-        })
-
-        
+            data: [...this.state.data].concat(data),
+            showGenerate: true
+        });
     }
     addField(){
         const newInput = `input_${this.state.inputBox.length}`;
@@ -43,15 +42,13 @@ class InputFields extends Component{
             inputBox: [...this.state.inputBox, newInput]
         })
     }
-    componentDidUpdate(){
-        console.log('did mount');
-        this.props.getFields(this.state);
-    }
+
     render(){
-        console.log(this.state.data);
-        const createInput = this.state.inputBox.map((item, index)=>{
+        const {inputBox, data, showGenerate} = this.state;
+        const createInput = inputBox.map((item, index)=>{
             return <Inputs ref={index} key={index} id={item}/>
-        })
+        });
+
         return(
         <Fragment>
             <div className="row">
@@ -60,8 +57,9 @@ class InputFields extends Component{
             <div className="row buttons">
                 <div className="error red-text">{this.state.error}</div>
                 <Addfield addFields={this.addField} />
-                <Generate passField={this.passField}/>
+                <Generate passField={this.passField} />
             </div>
+                { showGenerate ? <GenerateData inputs={data} /> : null }
         </Fragment>
         )
     }
