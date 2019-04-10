@@ -78,7 +78,7 @@ class GenerateData extends Component {
         return(
             <div>
                 <h1>Result</h1>
-                <p>{output}</p>
+                <pre>{output}</pre>
             </div>
         );
     }
