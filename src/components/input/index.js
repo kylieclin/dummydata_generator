@@ -59,7 +59,7 @@ class InputFields extends Component{
                 <Addfield addFields={this.addField} />
                 <Generate passField={this.passField} />
             </div>
-                { showGenerate ? <GenerateData inputs={data} /> : null }
+            { showGenerate ? <GenerateData inputs={data} /> : null }
         </Fragment>
         )
     }

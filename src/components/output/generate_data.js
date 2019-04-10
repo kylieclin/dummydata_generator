@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import OutputModal from './modal';
 
 class GenerateData extends Component {
     constructor(props){
@@ -76,12 +77,13 @@ class GenerateData extends Component {
     render(){
         const output = this.generateData();
         return(
-            <div>
-                <h1>Result</h1>
-                <pre>{output}</pre>
-            </div>
+
+                
+                <OutputModal output={output} />
+
         );
     }
 }
 
 export default GenerateData;
+
