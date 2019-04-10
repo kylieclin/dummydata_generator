@@ -1,25 +1,21 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 
 class GenerateData extends Component {
     constructor(props){
         super(props)
         this.state = {
             randomWords: 'Lorem ipsum',
-            numOfWords: 5,
-            randomNumber: 0,
+            randomNumber: 1,
         }
         this.newKey = null;
     }
 
 
-    // componentDidMount(){
-    //     //needs to be dynamic
-    //     this.getRandomWords();
-    //     this.getRandomNumber();
-
-    // }
+    componentDidMount(){
+        this.getRandomWords();
+        this.getRandomNumber();
+    }
 
     getRandomWords(){
         axios.get('https://yacdn.org/proxy/https://random-word-api.herokuapp.com/key', {
@@ -28,12 +24,12 @@ class GenerateData extends Component {
             return axios.get('https://random-word-api.herokuapp.com/word', {
                 params: {
                     key: this.newKey,
-                    number: this.state.numOfWords
+                    number: 2
                 }
             }).then((resp) => {
-                console.log('getword',resp)
+                const words = resp.data.join(' ');
                 this.setState({
-                    randomWords: resp.data
+                    randomWords: words
                 });
             });
         });
@@ -42,51 +38,47 @@ class GenerateData extends Component {
     getRandomNumber(){
         const randomNumber = Math.floor(Math.random() * 100);
         this.setState({
-            randomNumber
+            randomNumber: randomNumber
         });
     }
 
-    render(){
-        console.log('inputs', this.props.inputs)
+    generateData(){
         const {inputs} = this.props
-        const {option} = inputs;
-        const convertOptions = option.map((option) => {
-            this.getRandomWords();
-            this.getRandomNumber();
-            switch (option){
+        const convertOptions = inputs.map((box) => {
+            let opt = box.option;
+            switch (opt){
                 case 'string':
-                    option = this.state.randomWords;
+                    opt = this.state.randomWords;
                     break;
                 case 'number':
-                    option = this.state.number;
+                    opt = this.state.randomNumber;
                     break;
                 case 'object':
-                    option = {};
+                    opt = {};
                     break;
                 case 'array':
-                    option = [];
+                    opt = [];
                     break;
-                default:
-                    option = 'undefined';
+                case 'null':
+                    opt = 'null';
                     break;
             }
+            return {field: box.field, option: opt}
         });
-        console.log('converting options check switch statement', convertOptions);
-        inputs.option = convertOptions;
-        console.log('check if inputs has converted options', inputs);
-        const output = {}
-        inputs.map((input) => {
-            output[input.field] = input.option
+        const objOutput = {}
+        convertOptions.map((input) => {
+            objOutput[input.field] = input.option
         });
-        console.log('check before stringify', output);
-        const jsonOutput = json.Stringify(output);
-        console.log('check after stringify', jsonOutput);
+        const jsonOutput = JSON.stringify(objOutput, null, '\t');
+        return jsonOutput;
+    }
 
+    render(){
+        const output = this.generateData();
         return(
             <div>
-                <h1>Result:</h1>
-                <p>{jsonOutput}</p>
-                <Link to="/">Back</Link>
+                <h1>Result</h1>
+                <p>{output}</p>
             </div>
         );
     }
