@@ -4,6 +4,6 @@ import React from 'react';
 
 export default props => {
     return (
-    <button className="waves-effect waves-light btn-large" onClick={props.passField}>Generate</button>
+    <button className="waves-effect waves-light btn-large modal-trigger" href="#modal1" onClick={props.passField}>Generate</button>
     );
 }
