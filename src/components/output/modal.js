@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 class OutputModal extends Component{
     componentDidMount(){
         const option ={
-                startingTop: '5%',
-                endingTop: '5%'
+                startingTop: '20%'
             }
-        M.Modal.init(this.modal, option);
+        M.Modal.init(this.modal, option).open();
+
     }
     render(){
         debugger;
