@@ -19,14 +19,14 @@ class InputFields extends Component{
     }
     passField(){
         const data =[]
+    
         Object.keys(this.refs).map((input)=>{
 
-            if(!field && !option ){
+            if(!field && option === "default" ){
                 this.setState({
                     error: 'Please enter input field and data type.'
                 })
             } else {
-
                data.push(this.refs[input].state)
             }
 
