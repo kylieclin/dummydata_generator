@@ -21,7 +21,7 @@ class OutputModal extends Component{
     render(){
 
         return(
-        <div id="modal1" className="modal" ref={element=>{this.modal = element}}>
+        <div id="modal1" className="modal modal-fixed-footer" ref={element=>{this.modal = element}}>
             <div id="modalContent" className="modal-content" ref="modalContent">
                 <label>Your Dummy Data is here :)</label>
                 <textarea className="materialize-textarea" ref={e =>{this.modalContent = e}} value={this.props.output} readOnly>
@@ -29,7 +29,7 @@ class OutputModal extends Component{
                 <div>{this.state.message}</div>
             </div>
             <div className="modal-footer">
-                
+
                 <button className="waves-effect waves-green btn-flat" onClick={this.copyJson}>
                     <i className="material-icons">content_copy</i>
                 </button>

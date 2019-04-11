@@ -45,7 +45,7 @@ class InputBox extends Component {
     stringOption= ()=>{
         return(
             <div className="col s2 m1">
-                <label htmlFor="strlen">Length</label> 
+                <label htmlFor="strlen">Length</label>
                 <input id="strlen" className="strlen" type="number" onChange={this.handleInputDetail} min="1" max="200"/>
             </div>
         )
@@ -54,18 +54,17 @@ class InputBox extends Component {
         return(
             <Fragment>
                 <div className="col s1 m1">
-                <label htmlFor="minnum">From</label> 
+                <label htmlFor="minnum">From</label>
                 <input id="minnum" type="number" onChange={this.handleMin}/>
                 </div>
                 <div className="col s1 m1">
-                <label htmlFor="maxnum">To</label> 
+                <label htmlFor="maxnum">To</label>
                 <input id="maxnum" type="number" onChange={this.handleInputDetail}/>
                 </div>
             </Fragment>
         )
     }
     handleMin= (event)=>{
-        console.log(event.target.value);
         this.setState({
             min: event.target.value
         })
