@@ -6,7 +6,7 @@ class InputBox extends Component {
 
         this.state= {
             field: '',
-            option:'',
+            option:'defualt',
             max: '1',
             min: '0',
             input_detail: null
@@ -15,6 +15,7 @@ class InputBox extends Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleInputDetail = this.handleInputDetail.bind(this);
+        this.clearData = this.clearData.bind(this);
 
     }
     handleInput(event){
@@ -72,18 +73,27 @@ class InputBox extends Component {
     componentDidMount(){
         M.FormSelect.init(this.formSelect);
     }
+    clearData(){
+        this.setState({
+            field: '',
+            option:'default',
+            max: '1',
+            min: '0',
+            input_detail: null
+        },()=> M.FormSelect.init(this.formSelect));
+    }  
     render(){
         return (
             <Fragment>
                 <div className="field-input col s6 m6">
                     <form className=""action="">
                         <label htmlFor="field">Field</label>
-                        <input id="field" name="field" className="field" type="text" value={this.field} onChange={this.handleInput} placeholder="Enter Field"/>
+                        <input id="field" name="field" className="field" type="text" value={this.state.field} onChange={this.handleInput} placeholder="Enter Field"/>
                     </form>
                 </div>
                 <div className="type-select col s4 m2">
                     <label>Select Data Type
-                    <select  defaultValue="default" onChange={this.handleSelect} ref={(element)=>{this.formSelect = element}}>
+                    <select  value="default" onChange={this.handleSelect} ref={(element)=>{this.formSelect = element}}>
                         <option value="default" disabled>Select</option>
                         <option value="string">String</option>
                         <option value="number">Number</option>

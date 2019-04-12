@@ -27,14 +27,17 @@ class InputFields extends Component{
                     error: 'Please enter input field and data type.'
                 })
             } else {
-               data.push(this.refs[input].state)
+               data.push(this.refs[input].state);
+               this.refs[input].clearData();
             }
-
+        
         })
         this.setState({
             data: [...this.state.data].concat(data),
             showGenerate: true
         });
+
+        
     }
     addField(){
         const newInput = `input_${this.state.inputBox.length}`;
