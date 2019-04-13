@@ -6,7 +6,7 @@ class InputBox extends Component {
 
         this.state= {
             field: '',
-            option:'defualt',
+            option:'default',
             max: '1',
             min: '0',
             input_detail: null
