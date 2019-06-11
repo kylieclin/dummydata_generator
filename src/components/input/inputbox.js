@@ -85,7 +85,7 @@ class InputBox extends Component {
     render(){
         return (
             <Fragment>
-                <div className="field-input col s6 m6">
+                <div className="field-input col s8 m6">
                     <form className=""action="">
                         <label htmlFor="field">Field</label>
                         <input id="field" name="field" className="field" type="text" value={this.state.field} onChange={this.handleInput} placeholder="Enter Field"/>

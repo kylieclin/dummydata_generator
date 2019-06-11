@@ -10,7 +10,6 @@ class GenerateData extends Component {
         }
     }
 
-
     componentDidMount(){
         this.getRandomWords();
     }
