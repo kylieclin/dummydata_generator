@@ -37,12 +37,11 @@ class GenerateData extends Component {
 
     generateData(){
         const {inputs} = this.props
-        console.log(inputs)
         const convertOptions = inputs.map(({field, option, max, min}) => {
             if(field === '' || option === 'default'){
                 return {};
             } else {
-                let { randomWords } = this.state;
+                let {randomWords} = this.state;
                 let randomNumber = this.getRandomNumber(min, max)
                 switch (option) {
                     case 'string':
