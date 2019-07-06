@@ -37,31 +37,36 @@ class GenerateData extends Component {
 
     generateData(){
         const {inputs} = this.props
+        console.log(inputs)
         const convertOptions = inputs.map(({field, option, max, min}) => {
-            let {randomWords} = this.state;
-            let randomNumber = this.getRandomNumber(min, max)
-            switch (option){
-                case 'string':
-                    option = randomWords.splice(min, max).join(' ');
-                    break;
-                case 'number':
-                    option = randomNumber;
-                    break;
-                case 'object':
-                    option = {};
-                    break;
-                case 'array':
-                    option = [];
-                    break;
-                case 'null':
-                    option = 'null';
-                    break;
+            if(field === '' || option === 'default'){
+                return {};
+            } else {
+                let { randomWords } = this.state;
+                let randomNumber = this.getRandomNumber(min, max)
+                switch (option) {
+                    case 'string':
+                        option = randomWords.splice(min, max).join(' ');
+                        break;
+                    case 'number':
+                        option = randomNumber;
+                        break;
+                    case 'object':
+                        option = {};
+                        break;
+                    case 'array':
+                        option = [];
+                        break;
+                    case 'null':
+                        option = 'null';
+                        break;
+                }
+                return {field: field, option: option};
             }
-            return {field: field, option: option}
         });
         const objOutput = {}
         convertOptions.map(({field, option}) => {
-            objOutput[field] = option
+            objOutput[field] = option;
         });
         const jsonOutput = JSON.stringify(objOutput, null, '\t');
         return jsonOutput;
