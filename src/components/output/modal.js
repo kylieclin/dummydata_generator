@@ -15,7 +15,7 @@ class OutputModal extends Component{
         this.modalContent.select();
         document.execCommand("copy");
         this.setState({
-            message: 'copied!'
+            message: 'Copied!'
         })
     }
     render(){
@@ -30,14 +30,15 @@ class OutputModal extends Component{
             </div>
             <div className="modal-footer">
 
-                <button className="waves-effect waves-green btn-flat" onClick={this.copyJson}>
+                <button className="waves-effect waves-light btn-flat" onClick={this.copyJson}>
                     <i className="material-icons">content_copy</i>
                 </button>
-                <a href="#!" className="modal-close waves-effect waves-green btn-flat">Close</a>
+                <a href="#!" className="modal-close waves-effect waves-light btn-flat">Close</a>
             </div>
         </div>
         )
     }
 };
+
 
 export default OutputModal;
