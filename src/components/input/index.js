@@ -18,8 +18,8 @@ class InputFields extends Component{
         this.addField = this.addField.bind(this);
     }
     passField(){
-        const data =[]
-    
+        const data = [];
+
         Object.keys(this.refs).map((input)=>{
 
             if(!field && option === "default" ){
@@ -30,14 +30,14 @@ class InputFields extends Component{
                data.push(this.refs[input].state);
                this.refs[input].clearData();
             }
-        
+
         })
         this.setState({
-            data: [...this.state.data].concat(data),
+            data,
             showGenerate: true
         });
+console.log('input state', this.state)
 
-        
     }
     addField(){
         const newInput = `input_${this.state.inputBox.length}`;
